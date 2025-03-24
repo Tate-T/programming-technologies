@@ -25,9 +25,18 @@ const technologies = [
         img: "https://upload.wikimedia.org/wikipedia/ru/thumb/3/39/Java_logo.svg/1200px-Java_logo.svg.png"
     }
 ];
+const listOfHeroes = document.querySelector('.hero__list')
 
 
-
-technologies.map(technology => {
-
+const finalTechnologies = technologies.map(technology => {
+const elementOfLi = `<li class="hero__item">
+<h2 class="hero__subtitle">${technology.title}</h2>
+<p class="hero__text">${technology.description}</p>
+<img class="hero__image" src="${technology.img}" alt=""></img>
+</li>`
+return elementOfLi
 })
+console.log(finalTechnologies)
+const technologiesStrings = finalTechnologies.join('')
+console.log(technologiesStrings)
+listOfHeroes.innerHTML = technologiesStrings
