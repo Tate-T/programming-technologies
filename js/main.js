@@ -29,14 +29,34 @@ const listOfHeroes = document.querySelector('.hero__list')
 
 
 const finalTechnologies = technologies.map(technology => {
-const elementOfLi = `<li class="hero__item">
+const elementOfLi = `<li data-info="${technology.description}" class="hero__item">
 <h2 class="hero__subtitle">${technology.title}</h2>
-<p class="hero__text">${technology.description}</p>
-<img class="hero__image" src="${technology.img}" alt=""></img>
+<img class="hero__image" src="${technology.img}" alt="" />
+<button type="button" class="pushable">
+  <span class="shadow"></span>
+  <span class="edge"></span>
+  <span class="front"> Read More </span>
+</button>
+
 </li>`
 return elementOfLi
 })
-console.log(finalTechnologies)
 const technologiesStrings = finalTechnologies.join('')
-console.log(technologiesStrings)
 listOfHeroes.innerHTML = technologiesStrings
+
+const backdrop = document.querySelector(".backdrop");
+const closeButton = document.querySelector(".button");
+const liItem = document.querySelector(".hero__item");
+
+listOfHeroes.addEventListener("click", (event) => {
+    if (event.target.nodeName === "BUTTON" || event.target.nodeName === "SPAN") {
+        backdrop.classList.remove("is-hidden")
+        // const modalDescribtion = event.target.parentNode.dataset.info;
+        const modalDescribtion = event.target.closest(".hero__item").dataset.info;
+        const modalText = document.querySelector(".text");
+        modalText.textContent = modalDescribtion;
+    }
+});
+closeButton.addEventListener("click", (event) => {
+    backdrop.classList.add("is-hidden")
+})
